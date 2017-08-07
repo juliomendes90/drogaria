@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-05-04T12:40:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtos" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fefc6a2e-c34e-4000-8cc5-30c2d15f35e2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Drogaria Data Adapter "/>
+	<parameter name="PRODUTO_DESCRICAO" class="java.lang.String"/>
+	<parameter name="FABRICANTE_DESCRICAO" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT drogaria.produto.descricao AS pdescricao,
+	drogaria.produto.preco,
+	drogaria.produto.quantidade,
+	drogaria.fabricante.descricao AS fdescricao
+FROM drogaria.produto
+	INNER JOIN drogaria.fabricante ON 
+	 drogaria.produto.fabricante_codigo = drogaria.fabricante.codigo 
+WHERE 
+	 drogaria.produto.descricao LIKE $P{PRODUTO_DESCRICAO} 
+	 AND drogaria.fabricante.descricao LIKE $P{FABRICANTE_DESCRICAO} 
+ORDER BY drogaria.produto.descricao ASC,
+	drogaria.fabricante.descricao ASC]]>
+	</queryString>
+	<field name="pdescricao" class="java.lang.String"/>
+	<field name="preco" class="java.math.BigDecimal"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="fdescricao" class="java.lang.String"/>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="550" height="80" uuid="6c0ae926-3af0-48db-b4b3-5c78a27d20ea"/>
+				<imageExpression><![CDATA["src/main/webapp/resources/images/logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="6" width="550" height="30" uuid="06f57bfe-a54a-4d74-88c8-9efa10b9c4f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIOS DE PRODUTOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="140" height="30" uuid="5cc876ca-643c-4479-ac88-eab87769b343"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="120" height="30" uuid="c8c9557a-0436-479f-b54a-ce092b1f9a44"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="30" uuid="0e6547aa-d40f-4deb-bd03-6c694375cc5d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="140" height="30" uuid="d88b87e7-e020-4f6e-ac87-5093a245250e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fabricante]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="140" height="30" uuid="0954df5c-bfe6-4ab9-a26b-b897e7ade84f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pdescricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="0.00">
+				<reportElement x="150" y="0" width="120" height="30" uuid="83aa017e-947a-4144-b0fa-d765132e1ee5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="30" uuid="ba5f1e58-0d5f-4c7c-94f8-8b49f9477b76"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="140" height="30" uuid="deccb521-1221-4f65-ba58-45d657038fbb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fdescricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="550" height="30" uuid="15a31a72-ff07-467f-a988-d7dd70307cfc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rua Afonso Rondeau,32, Santissimo - Rio de Janeiro]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

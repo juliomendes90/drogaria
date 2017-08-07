@@ -1,0 +1,25 @@
+package br.com.juliomendes90.drogaria2.util;
+
+import org.hibernate.Session;
+import org.junit.Test;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>HibernateUtilTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class HibernateUtilTest {
+
+	/**
+	 * Conectar.
+	 */
+	@Test
+	public void conectar() {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		sessao.close();
+		HibernateUtil.getFabricaDeSessoes().close();
+	}
+}

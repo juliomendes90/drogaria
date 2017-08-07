@@ -1,0 +1,145 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.Fabricante;
+import br.com.juliomendes90.drogaria2.domain.Produto;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>ProdutoDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class ProdutoDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	@Ignore
+	public void salvar() {
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(2L);
+
+		Produto produto = new Produto();
+		produto.setDescricao("Betes");
+		produto.setFabricante(fabricante);
+		produto.setPreco(new BigDecimal("11.93"));
+		produto.setQuantidade(new Short("2"));
+
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		produtoDAO.salvar(produto);
+
+		System.out.println("Produto salvo com sucesso!");
+
+	}
+
+	/**
+	 * Buscar.
+	 */
+	@Test
+	@Ignore
+	public void buscar() {
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscar(2L);
+
+		if (produto != null) {
+			System.out.println("Produto: " + produto.getDescricao());
+			System.out.println("Fabricante: "
+					+ produto.getFabricante().getDescricao());
+		}
+
+	}
+
+	/**
+	 * Listar.
+	 */
+	@Test
+	@Ignore
+	public void listar() {
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+
+		List<Produto> listaProdutos = produtoDAO.listar();
+
+		System.out.println("Total encontrado: " + listaProdutos.size() + "\n");
+
+		for (Produto produto : listaProdutos) {
+			System.out.println("Produto: " + produto.getDescricao());
+			System.out.println("Fabricante: "
+					+ produto.getFabricante().getDescricao());
+			System.out.println("");
+		}
+	}
+
+	/**
+	 * Excluir.
+	 */
+	@Test
+	@Ignore
+	public void excluir() {
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscar(9L);
+
+		if (produto != null) {
+			produtoDAO.excluir(produto);
+			System.out.println("Produto " + produto.getDescricao()
+					+ " excluído com sucesso!");
+		} else {
+			System.out.println("Produto não localizado!");
+		}
+	}
+
+	/**
+	 * Editar.
+	 */
+	@Test
+	@Ignore
+	public void editar() {
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscar(8L);
+
+		if (produto != null) {
+			System.out.println("Produto a ser editado: "
+					+ produto.getDescricao() + " - "
+					+ produto.getFabricante().getDescricao());
+		} else {
+			System.out.println("Produto não localizado!");
+		}
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(2L);
+
+		produto.setDescricao("Bioflac");
+
+		if (fabricante != null) {
+			produto.setFabricante(fabricante);
+		}
+
+		produto.setPreco(new BigDecimal("8.26"));
+		produto.setQuantidade(new Short("34"));
+
+		produtoDAO.editar(produto);
+
+		System.out.println("Produto editado: " + produto.getDescricao() + " - "
+				+ produto.getFabricante().getDescricao());
+	}
+}

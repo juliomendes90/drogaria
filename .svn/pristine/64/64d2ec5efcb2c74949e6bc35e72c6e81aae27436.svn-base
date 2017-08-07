@@ -1,0 +1,45 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@SuppressWarnings("serial")
+@Entity
+public class Cidade extends GenericDomain {
+	@Column(length = 50, nullable = false)
+	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Estado estado;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+}

@@ -1,0 +1,146 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.Cidade;
+import br.com.juliomendes90.drogaria2.domain.Estado;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>CidadeDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class CidadeDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	@Ignore
+	public void salvar() {
+		EstadoDAO estadoDAO = new EstadoDAO();
+
+		Estado estado = estadoDAO.buscar(2L);
+
+		Cidade cidade = new Cidade();
+		cidade.setNome("Rio Branco");
+		cidade.setEstado(estado);
+
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		cidadeDAO.salvar(cidade);
+	}
+
+	/**
+	 * Listar.
+	 */
+	@Test
+	@Ignore
+	public void listar() {
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		List<Cidade> resultado = cidadeDAO.listar();
+
+		System.out.println("Quantidade a listar: " + resultado.size() + ".");
+
+		for (Cidade cidade : resultado) {
+			System.out.println("Cidade: " + cidade.getNome() + " - "
+					+ cidade.getEstado().getSigla());
+		}
+	}
+
+	/**
+	 * Buscar.
+	 */
+	@Test
+	@Ignore
+	public void buscar() {
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		Cidade cidade = cidadeDAO.buscar(90L);
+
+		if (cidade != null) {
+			System.out.println(cidade.getNome() + " - "
+					+ cidade.getEstado().getNome());
+		} else {
+			System.out.println("Cidade inexistente!");
+		}
+	}
+
+	/**
+	 * Excluir.
+	 */
+	@Test
+	@Ignore
+	public void excluir() {
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		Cidade cidade = cidadeDAO.buscar(10L);
+
+		if (cidade != null) {
+			cidadeDAO.excluir(cidade);
+			System.out.println("Cidade " + cidade.getNome() + " excluída!");
+		} else {
+			System.out.println("Cidade informada não existente!");
+		}
+	}
+
+	/**
+	 * Editar.
+	 */
+	@Test
+	@Ignore
+	public void editar() {
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		Cidade cidade = cidadeDAO.buscar(1L);
+
+		System.out.println("Cidade a ser editada: " + cidade.getNome() + " - "
+				+ cidade.getEstado().getSigla());
+
+		cidade.setNome("Guarapuava");
+
+		EstadoDAO estadoDAO = new EstadoDAO();
+		Estado estado = estadoDAO.buscar(18L);
+
+		cidade.setEstado(estado);
+
+		cidadeDAO.editar(cidade);
+
+		System.out.println("Cidade a editada: " + cidade.getNome() + " - "
+				+ cidade.getEstado().getSigla());
+	}
+	
+	/**
+	 * Buscar por estado.
+	 */
+	@Test
+	@Ignore
+	public void buscarPorEstado() {
+		
+		Long estadoCodigo = 15L;
+		
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		List<Cidade> resultado = cidadeDAO.buscarPorEstado(estadoCodigo);
+
+		System.out.println("Quantidade a listar: " + resultado.size() + ".");
+
+		for (Cidade cidade : resultado) {
+			System.out.println("Cidade: " + cidade.getNome() + " - "
+					+ cidade.getEstado().getSigla());
+		}
+	}
+}

@@ -1,0 +1,53 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.Pessoa;
+import br.com.juliomendes90.drogaria2.domain.Usuario;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>UsuarioDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class UsuarioDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	public void salvar() {
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		Pessoa pessoa = pessoaDAO.buscar(5L);
+		
+		System.out.println("Pessoa encontrada!");
+		System.out.println("Nome: " + pessoa.getNome());
+		System.out.println("CPF: " + pessoa.getCpf());
+		
+		Usuario usuario = new Usuario();
+		usuario.setAtivo(true);
+		usuario.setPessoa(pessoa);
+		usuario.setSenha("q1w2e3r4");
+		usuario.setTipo('A');
+		
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.salvar(usuario);
+		
+		System.out.println("Usuário salva com sucesso!");
+	}
+}

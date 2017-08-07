@@ -1,0 +1,52 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.util;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>HibernateContexto</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class HibernateContexto implements ServletContextListener {
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
+	 */
+	@Override
+	public void contextDestroyed(ServletContextEvent arg0) {
+		
+		// chamada ao hibernate
+		HibernateUtil.getFabricaDeSessoes().close();
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
+	 */
+	@Override
+	public void contextInitialized(ServletContextEvent event) {
+		
+		// chamada ao hibernate
+		HibernateUtil.getFabricaDeSessoes();
+		
+		
+	}
+
+	
+	
+}

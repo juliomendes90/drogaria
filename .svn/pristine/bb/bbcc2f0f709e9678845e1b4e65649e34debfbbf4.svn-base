@@ -1,0 +1,146 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.Fabricante;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>FabricanteDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class FabricanteDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	@Ignore
+	public void salvar() {
+		Fabricante fabricante = new Fabricante();
+		fabricante.setCodigo(4L);
+		fabricante.setDescricao("Eurofarma");
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		fabricanteDAO.salvar(fabricante);
+	}
+
+	/**
+	 * Listar.
+	 */
+	@Test
+	@Ignore
+	public void listar() {
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+
+		List<Fabricante> resultado = fabricanteDAO.listar();
+
+		System.out.println("Total de resultados: " + resultado.size());
+
+		for (Fabricante fabricante : resultado) {
+			System.out.println("Fabricante: " + fabricante.getDescricao());
+		}
+	}
+
+	/**
+	 * Buscar.
+	 */
+	@Test
+	@Ignore
+	public void buscar() {
+		Long codigo = 5L;
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+
+		if (fabricante != null) {
+			System.out.println("Fabricante: " + fabricante.getDescricao());
+		} else {
+			System.out.println("Fabricante não encontrado.");
+		}
+	}
+
+	/**
+	 * Excluir.
+	 */
+	@Test
+	@Ignore
+	public void excluir() {
+		Long codigo = 4L;
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+
+		if (fabricante != null) {
+			fabricanteDAO.excluir(fabricante);
+			System.out.println("Registro removido: "
+					+ fabricante.getDescricao() + "!");
+		} else {
+			System.out.println("Nenhum registro encontrado!");
+		}
+	}
+
+	/**
+	 * Editar.
+	 */
+	@Test
+	@Ignore
+	public void editar() {
+		Long codigo = 3L;
+
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+
+		if (fabricante != null) {
+			System.out.println("Registro editado - antes: "
+					+ fabricante.getDescricao());
+
+			fabricante.setDescricao("Eurofarma");
+
+			fabricanteDAO.editar(fabricante);
+
+			System.out.println("Registro editado - depois: "
+					+ fabricante.getDescricao());
+		} else {
+			System.out.println("Registro não encontrado!");
+		}
+	}
+	
+	/**
+	 * Merge.
+	 */
+	@Test
+	public void merge() {
+//		Fabricante fabricante = new Fabricante();
+//		fabricante.setDescricao("Eurofarma Merge");
+//
+//		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+//		fabricanteDAO.merge(fabricante);
+		
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(4L);
+		fabricante.setDescricao("Eurofarma 2");
+		
+		fabricanteDAO.merge(fabricante);
+	}
+}

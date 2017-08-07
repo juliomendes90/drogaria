@@ -1,0 +1,188 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.Cliente;
+import br.com.juliomendes90.drogaria2.domain.Funcionario;
+import br.com.juliomendes90.drogaria2.domain.Venda;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>VendaDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class VendaDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	@Ignore
+	public void salvar() {
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+		Funcionario funcionario = funcionarioDAO.buscar(2L);
+
+		ClienteDAO clienteDAO = new ClienteDAO();
+
+		Cliente cliente = clienteDAO.buscar(3L);
+
+		VendaDAO vendaDAO = new VendaDAO();
+
+		Venda venda = new Venda();
+		venda.setHorario(new Date());
+		venda.setPrecoTotal(new BigDecimal("214.98"));
+
+		if (cliente != null) {
+			venda.setCliente(cliente);
+		}
+
+		if (funcionario != null) {
+			venda.setFuncionario(funcionario);
+		}
+
+		vendaDAO.salvar(venda);
+	}
+
+	/**
+	 * Buscar.
+	 */
+	@Test
+	@Ignore
+	public void buscar() {
+
+		VendaDAO vendaDAO = new VendaDAO();
+
+		Venda venda = vendaDAO.buscar(1L);
+
+		if (venda != null) {
+			System.out.println("Venda: " + venda.getHorario()
+					+ "\nFuncionário: "
+					+ venda.getFuncionario().getPessoa().getNome());
+		} else {
+			System.out.println("Venda não encontrada!");
+		}
+	}
+
+	/**
+	 * Listar.
+	 */
+	@Test
+	@Ignore
+	public void listar() {
+
+		VendaDAO vendaDAO = new VendaDAO();
+
+		List<Venda> listaVendas = vendaDAO.listar();
+
+		System.out.println("Total de vendas: " + listaVendas.size());
+		System.out.println("");
+
+		for (Venda venda : listaVendas) {
+			System.out.println("Venda: " + venda.getCodigo());
+			System.out.println("Horário: " + venda.getHorario());
+			System.out.println("Valor Total: " + venda.getPrecoTotal());
+
+			if (venda.getFuncionario() != null) {
+				System.out.println("Funcionario: "
+						+ venda.getFuncionario().getPessoa().getNome());
+			}
+
+			if (venda.getCliente() != null) {
+				System.out.println("Cliente: "
+						+ venda.getCliente().getPessoa().getNome());
+			}
+
+			System.out.println("");
+		}
+	}
+
+	/**
+	 * Excluir.
+	 */
+	@Test
+	@Ignore
+	public void excluir() {
+		VendaDAO vendaDAO = new VendaDAO();
+
+		Venda venda = vendaDAO.buscar(2L);
+
+		if (venda != null) {
+			System.out.println("Venda excluída: " + venda.getCodigo()
+					+ "Funcionario: "
+					+ venda.getFuncionario().getPessoa().getNome()
+					+ "Horário: " + venda.getHorario() + "Valor Total: "
+					+ venda.getPrecoTotal() + "Cliente: "
+					+ venda.getCliente().getPessoa().getNome());
+
+			vendaDAO.excluir(venda);
+		} else {
+			System.out.println("Venda não encontrada para exclusão!");
+		}
+	}
+
+	/**
+	 * Editar.
+	 */
+	@Test
+	@Ignore
+	public void editar() {
+		VendaDAO vendaDAO = new VendaDAO();
+
+		Venda venda = vendaDAO.buscar(3L);
+
+		if (venda != null) {
+			System.out.println("Venda a ser editada: " + venda.getCodigo()
+					+ "Funcionario: "
+					+ venda.getFuncionario().getPessoa().getNome()
+					+ "Horário: " + venda.getHorario() + "Valor Total: "
+					+ venda.getPrecoTotal() + "Cliente: "
+					+ venda.getCliente().getPessoa().getNome());
+
+			venda.setHorario(new Date());
+			venda.setPrecoTotal(new BigDecimal("100.01"));
+
+			ClienteDAO clienteDAO = new ClienteDAO();
+			Cliente cliente = clienteDAO.buscar(3L);
+
+			venda.setCliente(cliente);
+
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			Funcionario funcionario = funcionarioDAO.buscar(2L);
+
+			venda.setFuncionario(funcionario);
+
+			vendaDAO.editar(venda);
+
+			System.out.println("Venda editada: " + venda.getCodigo()
+					+ "Funcionario: "
+					+ venda.getFuncionario().getPessoa().getNome()
+					+ "Horário: " + venda.getHorario() + "Valor Total: "
+					+ venda.getPrecoTotal() + "Cliente: "
+					+ venda.getCliente().getPessoa().getNome());
+
+		} else {
+			System.out.println("Venda não encontrada para edição!");
+		}
+	}
+}

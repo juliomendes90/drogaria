@@ -1,0 +1,171 @@
+/**
+ * Copyright (c) 2016  Brasilcap - www.brasilcap.com.br
+ * Todos os direitos reservados.
+ * 
+ * NÃO ALTERE OU REMOVA AS INFORMAÇÕES DE COPYRIGHT
+ * OU AS INFORMAÇÕES CONTIDAS NESTE HEADER
+ * 
+ * Este código-fonte é de propriedade da Brasilcap Capitalizações S.A.
+ * e não pode ser copiado, modificado ou compartilhado sem autorização 
+ * prévia, estando sujeito a penalidades judiciais caso ocorra.
+ * 
+ */
+package br.com.juliomendes90.drogaria2.dao;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.juliomendes90.drogaria2.domain.ItemVenda;
+import br.com.juliomendes90.drogaria2.domain.Produto;
+import br.com.juliomendes90.drogaria2.domain.Venda;
+
+/**
+ * {Descricao da Classe}
+ * 
+ * Classe <code>ItemVendaDAOTest</code>.
+ * 
+ * @author jcmorais
+ * @version 1.0 (18/07/2016)
+ */
+public class ItemVendaDAOTest {
+
+	/**
+	 * Salvar.
+	 */
+	@Test
+	@Ignore
+	public void salvar() {
+		ItemVenda itemVenda = new ItemVenda();
+		itemVenda.setQuantidade(new Short("2"));
+		itemVenda.setPrecoParcial(new BigDecimal("433.00"));
+
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscar(3L);
+
+		itemVenda.setProduto(produto);
+
+		VendaDAO vendaDAO = new VendaDAO();
+		Venda venda = vendaDAO.buscar(3L);
+
+		itemVenda.setVenda(venda);
+
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		itemVendaDAO.salvar(itemVenda);
+
+		System.out.println("Item venda " + itemVenda.getCodigo()
+				+ " salvo com sucesso!");
+	}
+
+	/**
+	 * Buscar.
+	 */
+	@Test
+	@Ignore
+	public void buscar() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(4L);
+
+		if (itemVenda != null) {
+			System.out.println("Item Venda encontrado: \n"
+					+ itemVenda.getCodigo() + "\n" + itemVenda.getQuantidade()
+					+ "\n" + itemVenda.getProduto().getDescricao() + "\n"
+					+ itemVenda.getVenda().getCliente().getPessoa().getNome());
+			System.out.println("");
+		} else {
+			System.out.println("Item Venda não localizado!");
+		}
+	}
+
+	/**
+	 * Listar.
+	 */
+	@Test
+	@Ignore
+	public void listar() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		List<ItemVenda> listaItensVenda = itemVendaDAO.listar();
+
+		System.out
+				.println("Itens Venda encontrados: " + listaItensVenda.size());
+		System.out.println("");
+
+		for (ItemVenda itemVenda : listaItensVenda) {
+			System.out.println("Código: " + itemVenda.getCodigo());
+			System.out.println("Preço parcial: " + itemVenda.getPrecoParcial());
+			System.out.println("Quantidade: " + itemVenda.getQuantidade());
+			System.out.println("Produto: "
+					+ itemVenda.getProduto().getDescricao());
+			System.out.println("Venda: " + itemVenda.getVenda().getCodigo());
+			System.out.println("");
+		}
+	}
+
+	/**
+	 * Excluir.
+	 */
+	@Test
+	@Ignore
+	public void excluir() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(3L);
+
+		if (itemVenda != null) {
+			System.out.println("Item Venda a ser excluído: "
+					+ itemVenda.getCodigo());
+
+			itemVendaDAO.excluir(itemVenda);
+		} else {
+			System.out.println("Item Venda não encontrado!");
+		}
+	}
+
+	/**
+	 * Editar.
+	 */
+	@Test
+	@Ignore
+	public void editar() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(5L);
+
+		if (itemVenda != null) {
+			System.out.println("Item Venda a ser editado!");
+			System.out.println("Código: " + itemVenda.getCodigo());
+			System.out.println("Preço parcial: " + itemVenda.getPrecoParcial());
+			System.out.println("Quantidade: " + itemVenda.getQuantidade());
+			System.out.println("Produto: "
+					+ itemVenda.getProduto().getDescricao());
+			System.out.println("Venda: " + itemVenda.getVenda().getCodigo());
+			System.out.println("");
+
+			itemVenda.setQuantidade(new Short("15"));
+			itemVenda.setPrecoParcial(new BigDecimal("99.50"));
+
+			ProdutoDAO produtoDAO = new ProdutoDAO();
+			Produto produto = produtoDAO.buscar(1L);
+
+			itemVenda.setProduto(produto);
+
+			VendaDAO vendaDAO = new VendaDAO();
+			Venda venda = vendaDAO.buscar(3L);
+
+			itemVenda.setVenda(venda);
+
+			itemVendaDAO.editar(itemVenda);
+
+			System.out.println("Item Venda editado!");
+			System.out.println("Código: " + itemVenda.getCodigo());
+			System.out.println("Preço parcial: " + itemVenda.getPrecoParcial());
+			System.out.println("Quantidade: " + itemVenda.getQuantidade());
+			System.out.println("Produto: "
+					+ itemVenda.getProduto().getDescricao());
+			System.out.println("Venda: " + itemVenda.getVenda().getCodigo());
+			System.out.println("");
+		} else {
+			System.out.println("Item Venda não encontrado!");
+		}
+	}
+}
