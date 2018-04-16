@@ -43,6 +43,7 @@
 		<mapping class="br.com.juliomendes90.drogaria.domain.Produto" />
 		<mapping class="br.com.juliomendes90.drogaria.domain.Usuario" />
 		<mapping class="br.com.juliomendes90.drogaria.domain.Venda" />
+		<mapping class="br.com.juliomendes90.drogaria.domain.Historico" />
 		
 	</session-factory>
 

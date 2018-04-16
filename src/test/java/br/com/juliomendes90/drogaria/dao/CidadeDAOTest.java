@@ -31,7 +31,7 @@ public class CidadeDAOTest {
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void listar() {
 
 		CidadeDAO cidadeDAO = new CidadeDAO();
@@ -120,6 +120,7 @@ public class CidadeDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void buscarPorEstado() {
 		
 		Long estadoCodigo = 3L;
